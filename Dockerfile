@@ -1,21 +1,24 @@
-# Start from the official Jenkins image
 FROM jenkins/jenkins:latest
 
-# Set the working directory to /var/jenkins_home
-WORKDIR /var/jenkins_home
+# Switch to root to install dependencies and modify directories
+USER root
 
-# Copy the HelloWorldJob.tar.gz file into the image
-COPY HelloWorldJob.tar.gz /tmp/HelloWorldJob.tar.gz
+# Create the necessary directories
+RUN mkdir -p /var/jenkins_home/jobs
 
-# Extract the job data to the appropriate directory
+# Copy the job tar file into the image
+COPY HelloWorldJob.tar.gz /tmp/
+
+# Extract the job and ensure the correct permissions
 RUN tar -xzf /tmp/HelloWorldJob.tar.gz -C /var/jenkins_home/jobs && \
-    rm /tmp/HelloWorldJob.tar.gz
+    rm /tmp/HelloWorldJob.tar.gz && \
+    chown -R jenkins:jenkins /var/jenkins_home
 
-# Ensure the permissions are correct
-RUN chown -R jenkins:jenkins /var/jenkins_home
+# Switch back to Jenkins user to run Jenkins
+USER jenkins
 
-# Expose the port Jenkins will run on
-EXPOSE 8080
+# Expose Jenkins ports
+EXPOSE 8080 50000
 
-# Set the default command to run Jenkins
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
+# Run Jenkins
+ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
