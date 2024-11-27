@@ -3,22 +3,10 @@
 
 This project provides a Jenkins Docker image that includes a pre-configured Jenkins job called `HelloWorldJob`. This allows you to quickly deploy Jenkins with the job already set up and ready to use.
 
-## Prerequisites
+## You Need:
 
 - Docker installed on your system.
 - Basic knowledge of Docker and Jenkins.
-
-## Files Structure
-
-Here is the directory structure of this project:
-
-```
-/jenkins-job-project
-│
-├── HelloWorldJob.tar.gz         # Your Jenkins job archive (e.g., HelloWorldJob.tar.gz)
-├── Dockerfile                   # The Dockerfile to build the image
-└── README.md                    # This file
-```
 
 ### Dockerfile Overview
 
@@ -26,11 +14,9 @@ This `Dockerfile` is used to build the Docker image that includes the `HelloWorl
 
 ## How to Build the Docker Image
 
-1. Clone this repository (or download the files) to your local machine.
+1. Clone this repository to your local machine, then cd to its folder.
 
-2. **Make sure your `HelloWorldJob.tar.gz` is in the same directory as the `Dockerfile`.**
-
-3. **Build the Docker image:**
+2. **Build the Docker image:**
 
    Open your terminal and run the following command in the project directory:
 
@@ -80,16 +66,8 @@ This `Dockerfile` is used to build the Docker image that includes the `HelloWorl
 4. **Log in to Jenkins:**
 
    - Open [http://localhost:8080](http://localhost:8080) in your browser.
-   - Enter the password you retrieved earlier.
+   - Enter the password you retrieved earlier, username is admin.
    - Proceed with the setup wizard to complete the Jenkins installation.
-
-## Verifying the Job
-
-After logging into Jenkins, follow these steps:
-
-1. **Go to the Jenkins Dashboard.**
-2. **Navigate to the "Job" section** in the sidebar.
-3. **Check for the `HelloWorldJob`.**
 
 The `HelloWorldJob` should now be available and ready to be used. You can configure it or trigger a build as you would with any Jenkins job.
 
